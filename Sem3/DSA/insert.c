@@ -84,4 +84,5 @@ int main() {
             default: loop=0;
         }
     }
+    return 0;
 }
