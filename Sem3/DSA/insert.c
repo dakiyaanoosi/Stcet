@@ -11,7 +11,7 @@ void print(int a[], int size) {
 }
 
 void showMenu() {
-    printf("\n1. Insert at 1st position\n2. Insert at the Last position\n3. Insert at any position\n4. Type anything else to quit\n\n");
+    printf("\n1. Insert at 1st position\n2. Insert at the Last position\n3. Insert at any position\n\nType anything else to quit\n\n");
 }
 
 void insertFirst(int a[], int *size, int element) {
@@ -56,7 +56,7 @@ int main() {
 
     while(loop) {
         showMenu();
-        printf("Enter your choice [1/2/3/4] : ");
+        printf("Enter your choice [1/2/3] : ");
         scanf(" %c", &ch);
         
         switch(ch) {
@@ -72,7 +72,7 @@ int main() {
             print(a,size);
             break;
 
-            case '3': printf("Insert at position (1 - %d): ", size+1);
+            case '3': printf("Insert at position (1 - %d): ", size);
             scanf("%d", &index);
             index-=1;
             printf("Enter the element to be inserted : ");
