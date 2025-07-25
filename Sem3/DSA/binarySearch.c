@@ -23,7 +23,7 @@ int main()
 	int l=0, h=size-1, mid;
 	while(l<=h)
 	{
-		mid=(l+h)/2;
+		mid=l+(h-l)/2;
 		if(a[mid]==element) {
 			printf("\nElement found at position : %d\n\n",mid+1);
 			return 0;
