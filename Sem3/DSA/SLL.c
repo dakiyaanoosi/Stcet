@@ -6,60 +6,54 @@ struct Node {
     struct Node *next;
 };
 
-struct Node *head=NULL;
-int size=0;
+struct Node *head = NULL;
+int size = 0;
 
 struct Node* createNode(int value) {
-    struct Node *newNode=(struct Node*)malloc(sizeof(struct Node));
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data=value;
     newNode->next=NULL;
     return newNode;
 }
 
 void insertFirst(int value) {
-    struct Node *newNode=createNode(value);
+    struct Node *newNode = createNode(value);
     newNode->next=head;
     head=newNode;
     size++;
 }
 
 void insertLast(int value) {
-    struct Node *newNode=createNode(value);
-    
+    struct Node *newNode = createNode(value);
+
+    size++;
     if(head==NULL) {
         head=newNode;
-        size++;
         return;
     }
 
-    struct Node *temp=head;
+    struct Node *temp = head;
     while(temp->next!=NULL) {
         temp=temp->next;
     }
     temp->next=newNode;
-    size++;
 }
 
 void insertAt(int index, int value) {
     if(index<0 || index>size) {
-        printf("Invalid Index\n");
+        printf("Invaid Index!\n");
         return;
     }
     if(index==0) {
         insertFirst(value);
         return;
     }
-    else if(index==size) {
-        insertLast(value);
-        return;
-    }
 
-    struct Node *newNode=createNode(value);
-    struct Node *temp=head;
-
-    for(int i=0;i<index-1;i++)
+    struct Node *temp = head;
+    for(int i=0; i<index-1; i++)
     temp=temp->next;
 
+    struct Node *newNode = createNode(value);
     newNode->next=temp->next;
     temp->next=newNode;
     size++;
@@ -82,10 +76,10 @@ void deleteLast() {
         return;
     }
 
+    size--;
     if(head->next==NULL) {
         free(head);
         head=NULL;
-        size--;
         return;
     }
 
@@ -95,79 +89,63 @@ void deleteLast() {
     }
     free(temp->next);
     temp->next=NULL;
-    size--;
 }
 
 void deleteAt(int index) {
     if(index<0 || index>=size) {
-        printf("Invalid Index\n");
+        printf("Invalid Index!!\n");
         return;
     }
     if(index==0) {
         deleteFirst();
         return;
     }
-    else if(index==size-1) {
-        deleteLast();
-        return;
-    }
 
     struct Node *temp=head;
-    for(int i=0; i<index-1; i++) {
+    for(int i=0;i<index-1;i++) {
         temp=temp->next;
     }
-
     struct Node *toDelete=temp->next;
-    temp->next=toDelete->next;
+    temp->next=temp->next->next;
     free(toDelete);
     size--;
 }
 
-void printList() {
-    if(head==NULL) {
-        printf("List is Empty!\n");
-        return;
+int search(int value) {
+    int index=0;
+    struct Node *temp = head;
+    while(temp!=NULL) {
+        if(temp->data==value) {
+            return index;
+        }
+        temp=temp->next;
+        index++;
     }
-    struct Node *temp=head;
+    return -1;
+}
+
+int getSize() {
+    return size;
+}
+
+void printList() {
+    struct Node *temp = head;
     printf("List: ");
     while(temp!=NULL) {
-        printf("%d --> ", temp->data);
+        printf("%d --> ",temp->data);
         temp=temp->next;
     }
     printf("NULL\n");
     printf("Size: %d\n", size);
 }
 
-void freeList() {
+void clearList() {
     struct Node *temp=head;
     while(temp!=NULL) {
-        struct Node* nxt=temp->next;
-        free(temp);
-        temp=nxt;
+        struct Node *nxt=temp;
+        temp=temp->next;
+        free(nxt);
     }
-    head=NULL;
     size=0;
-}
-
-int main() {
-    insertLast(10);
-    insertLast(12);
-    insertLast(14);
-
-    insertFirst(8);
-    insertFirst(6);
-    insertFirst(4);
-    insertFirst(2);
-
-    insertAt(2,5);
-    insertAt(4,7);
-
-    deleteFirst();
-    deleteLast();
-    deleteAt(2);
-    deleteAt(0);
-
-    printList();
-    freeList();
-    return 0;
+    head=NULL;
 }
