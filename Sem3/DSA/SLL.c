@@ -142,9 +142,9 @@ void printList() {
 void clearList() {
     struct Node *temp=head;
     while(temp!=NULL) {
-        struct Node *nxt=temp;
+        struct Node *f=temp;
         temp=temp->next;
-        free(nxt);
+        free(f);
     }
     size=0;
     head=NULL;
