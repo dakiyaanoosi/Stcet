@@ -10,5 +10,5 @@ try:
         pay=(hours*rate)
     print("Total pay:",pay)
     
-except:
+except ValueError:
     print("Invalid Input!")
