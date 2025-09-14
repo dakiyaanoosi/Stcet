@@ -1,4 +1,4 @@
-#Program to find Eucledian distance b/w to points
+#Program to find Eucledian distance b/w two points
 import math
 try:
     x1=float(input("x1: "))
