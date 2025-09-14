@@ -31,5 +31,5 @@ try:
         for j in range (i):
             print("*", end=" ")
         print()
-except:
+except ValueError:
     print("Invalid Input!")
