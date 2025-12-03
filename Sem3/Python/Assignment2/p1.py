@@ -7,7 +7,7 @@ try:
     if(a+b>c and a+c>b and b+c>a):
         S=(a+b+c)/2
         A=math.sqrt(S*(S-a)*(S-b)*(S-c))
-        print(f"Area: {A: .2f}")
+        print(f"Area: {A:.2f}")
     else:
         print("Invalid triangle!")
 except ValueError:

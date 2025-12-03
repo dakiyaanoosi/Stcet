@@ -1,4 +1,4 @@
-#Program to find the 3rd side and the remaining 2 angles of a triangle when 2 of the slides and one angle is given
+#Program to find the 3rd side and the remaining 2 angles of a triangle when 2 of the sides and one angle is given
 import math
 try:
     b=float(input("Enter the side 'b': "))
