@@ -1,70 +1,92 @@
 #include<stdio.h>
+#include<stdlib.h>
 
-void merge(int a[], int left, int mid, int right) {
-    int s1 = mid-left+1;
-    int s2 = right-mid;
-    int L[s1], R[s2];
+void display(int a[], int size) {
+    printf("Array: [");
+    for(int i=0; i<size-1; i++)
+    printf("%d, ", a[i]);
+    printf("%d]\n", a[size-1]);
+}
 
-    int i, j, k=left;
-    for(i=0; i<s1; i++)
-    L[i]=a[left+i];
-    for(j=0; j<s2; j++)
-    R[j]=a[mid+1+j];
+void merge(int a[], int start, int mid, int end) {
+    int i=start, j=mid+1, k=0;
+    int len = end-start+1;
+    int *temp = malloc(len * sizeof(int));
 
-    i=0;
-    j=0;
-
-    while(i<s1 && j<s2) {
-        if(L[i] <= R[j]) {
-            a[k]=L[i];
+    while(i<=mid && j<=end) {
+        if(a[i] <= a[j]) {
+            temp[k] = a[i];
             i++;
         }
         else {
-            a[k] = R[j];
+            temp[k] = a[j];
             j++;
         }
         k++;
     }
 
-    while(i<s1) {
-        a[k] = L[i];
+    while(i<=mid) {
+        temp[k] = a[i];
         i++;
         k++;
     }
-    while(j<s2) {
-        a[k]=R[j];
+    
+    while(j<=end) {
+        temp[k] = a[j];
         j++;
         k++;
     }
+
+    for(int i=0; i<len; i++) {
+        a[start+i] = temp[i];
+    }
+
+    free(temp);
 }
 
-void mergeSort(int a[], int left, int right) {
-    if(left<right) {
-        int mid=left+(right-left)/2;
-        mergeSort(a, left, mid);
-        mergeSort(a, mid+1, right);
-
-        merge(a, left, mid, right);
+void mergeSort(int a[], int start, int end) {
+    if(start < end) {
+        int mid = start + (end-start)/2;
+        mergeSort(a, start, mid);
+        mergeSort(a, mid+1, end);
+        merge(a, start, mid, end);
     }
 }
 
 int main() {
-    printf("Enter the size of the array: ");
+    printf("Size of array: ");
     int size;
+    if(scanf("%d", &size) != 1) {
+        printf("Invalid input for 'Size of the array'.\n");
+        return 1;
+    }
+    
+    if(size<=0) {
+        printf("Size should be greater than 0.\n");
+        return 1;
+    }
 
-    scanf("%d",&size);
-	int a[size];
+    int *a = malloc(size * sizeof(int));
+    if(!a) {
+        printf("Memory Allocation failed!");
+        return 1;
+    }
 
-	printf("Enter the %d elements : ",size);
+    for(int i=0; i<size; i++) {
+        if(scanf("%d", &a[i]) != 1) {
+            printf("Invalid input for array element.\n");
+            free(a);
+            return 1;
+        }
+    }
 
-	for(int i=0;i<size;i++)
-	scanf("%d",&a[i]);
+    display(a, size);
 
-	mergeSort(a,0, size-1);
+    mergeSort(a, 0, size-1);
 
-	printf("\nSorted Array : ");
-	for(int i=0;i<size;i++)
-	printf("%d  ",a[i]);
-	printf("\n");
+    printf("Sorted ");
+    display(a, size);
+
+    free(a);
     return 0;
 }
