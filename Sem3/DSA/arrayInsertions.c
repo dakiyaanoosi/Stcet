@@ -66,16 +66,16 @@ int main() {
 
     printArray(a, size);
 
-    int ch;
+    char ch;
     while(1) {
         showMenu();
-        scanf("%d", &ch);
+        scanf(" %c", &ch);
         switch(ch) {
-            case 1: insertFirst(a, &size);
+            case '1': insertFirst(a, &size);
                       break;
-            case 2: insertlast(a, &size);
+            case '2': insertlast(a, &size);
                       break;
-            case 3: insertAny(a, &size);
+            case '3': insertAny(a, &size);
                       break;
             default:  return 0;
         } 

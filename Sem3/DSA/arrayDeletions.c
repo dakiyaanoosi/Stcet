@@ -11,7 +11,7 @@ void printArray(int a[], int size){
 void deleteFirst(int a[], int*size) {
     if(*size<=0) {
         printf("Array is Empty!");
-        return 0;
+        return;
     }
 
     for(int i=0; i<*size-1; i++)
@@ -24,7 +24,7 @@ void deleteFirst(int a[], int*size) {
 void deleteLast(int a[], int *size) {
     if(*size<=0) {
         printf("Array is Empty!");
-        return 0;
+        return;
     }
 
     *size-=1;
@@ -34,7 +34,7 @@ void deleteLast(int a[], int *size) {
 void deleteAny(int a[], int *size) {
     if(*size<=0) {
         printf("Array is Empty!");
-        return 0;
+        return;
     }
 
     int index;
@@ -67,18 +67,18 @@ int main() {
     
     printArray(a, size);
 
-    int ch;
+    char ch;
     while(1) {
         showMenu();
-        scanf("%d", &ch);
+        scanf(" %c", &ch);
         switch(ch) {
-            case 1: deleteFirst(a, &size);
+            case '1': deleteFirst(a, &size);
                       break;
-            case 2: deleteLast(a, &size);
+            case '2': deleteLast(a, &size);
                       break;
-            case 3: deleteAny(a, &size);
+            case '3': deleteAny(a, &size);
                       break;
             default:  return 0;
-        } 
+        }
     }
 }
