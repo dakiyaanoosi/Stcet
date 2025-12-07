@@ -1,4 +1,12 @@
-#include<stdio.h> 
+#include<stdio.h>
+#include<stdlib.h>
+
+void display(int a[], int size) {
+    printf("Array: [");
+    for(int i=0; i<size-1; i++)
+    printf("%d, ", a[i]);
+    printf("%d]\n", a[size-1]);
+}
 
 void swap(int *a, int *b) {
     int temp = *a;
@@ -6,45 +14,59 @@ void swap(int *a, int *b) {
     *b = temp;
 }
 
-int partition(int a[], int left, int right) {
-    int pivot = a[right];
-    int i = left-1;
-
-    for(int j=left; j<right; j++) {
-        if(a[j]<pivot) {
-            i++;
-            swap(&a[i], &a[j]);
+int partition(int a[], int start, int end) {
+    int pivot = a[end], index=start;
+    for(int i=start; i<end; i++) {
+        if(a[i] <= pivot) {
+            swap(&a[index], &a[i]);
+            index++;
         }
     }
-    swap(&a[i+1], &a[right]);
-    return i+1;
+    swap(&a[index], &a[end]);
+    return index;
 }
 
-void quickSort(int a[], int left, int right) {
-    if(left<right) {
-        int pivotIndex = partition(a, left, right);
-        quickSort(a, left, pivotIndex-1);
-        quickSort(a, pivotIndex+1, right);
+void quickSort(int a[], int start, int end) {
+    if(start<end) {
+        int pivotIndex = partition(a, start, end);
+        quickSort(a, start, pivotIndex-1);
+        quickSort(a, pivotIndex+1, end);
     }
 }
 
 int main() {
     printf("Enter the size of the array: ");
     int size;
+    if(scanf("%d", &size) != 1) {
+        printf("Invalid input for 'Size of the array'.\n");
+        return 1;
+    }
+    if(size<=0) {
+        printf("No elements to enter.\n");
+        return 1;
+    }
 
-    scanf("%d",&size);
-	int a[size];
+    int *a = malloc(size * sizeof(int));
+    if(!a) {
+        printf("Memory Allocation failed!");
+        return 1;
+    }
 
-	printf("Enter the %d elements : ",size);
+    printf("Enter the %d elements:\n", size);
+    for(int i=0; i<size; i++) {
+        if(scanf("%d", &a[i]) != 1) {
+            printf("Invalid input for 'element of the array'.\n");
+            free(a);
+            return 1;
+        }
+    }
 
-	for(int i=0;i<size;i++)
-	scanf("%d",&a[i]);
+    display(a, size);
 
-	quickSort(a,0, size-1);
+    quickSort(a, 0, size-1);
+    printf("Sorted ");
+    display(a, size);
 
-	printf("\nSorted Array : ");
-	for(int i=0;i<size;i++)
-	printf("%d  ",a[i]);
-	printf("\n");
+    free(a);
     return 0;
 }
