@@ -4,33 +4,45 @@
 #include<math.h>
 #define MAX 50
 
-struct stack {
+struct Stack {
     int top;
     double operands[MAX];
 };
 
-void printStack(struct stack *s) {
-    printf("Stack: ");
-    for (int i=0; i<=s->top; i++) {
-        printf("%.2f ", s->operands[i]);
-    }
-    printf("\n\n");
+void initialize(struct Stack *s) {
+    s->top=-1;
 }
 
-void push(struct stack *s, double element) {
-    if(s->top >= MAX-1) {
+int isEmpty(struct Stack *s) {
+    return (s->top)==-1;
+}
+
+int isFull(struct Stack *s) {
+    return (s->top)==MAX-1;
+}
+
+void push(struct Stack *s, double value) {
+    if(isFull(s)) {
         printf("Stack Overflow\n");
-        return;
+        exit(1);
     }
-    s->operands[++(s->top)] = element;
+    s->operands[(++(s->top))] = value;
 }
 
-double pop(struct stack *s) {
-    if(s->top <= -1) {
+double pop(struct Stack *s) {
+    if(isEmpty(s)) {
         printf("Stack Underflow\n");
         exit(1);
     }
     return s->operands[(s->top)--];
+}
+
+void display(struct Stack *s) {
+    printf("\nStack\n");
+    for(int i=s->top; i>=0; i--) {
+        printf("%.2f\n", s->operands[i]);
+    }
+    printf("\n");
 }
 
 int isDigit(char c) {
@@ -55,21 +67,21 @@ double evaluate(double a, double b, char op) {
 
 int main() {
     char postfix[MAX] = "623+-382/+*2$3+";
-    struct stack s;
-    s.top=-1;
+    struct Stack s;
+    initialize(&s);
 
     for(int i=0; postfix[i] != '\0'; i++) {
         char c = postfix[i];
         if(isDigit(c)) {
             push(&s, c-'0');
-            printStack(&s);
+            display(&s);
         }
         else if(c=='+' || c=='-' || c=='*' || c== '/' || c=='$') {
             double b = pop(&s);
             double a = pop(&s);
             push(&s, evaluate(a, b, c));
             printf("Operation: %c\n", c);
-            printStack(&s);
+            display(&s);
         }
     }
     printf("Answer: %.1f\n", s.operands[s.top]);
