@@ -1,5 +1,3 @@
-// Program to find the Trace of a Matrix
-
 #include<stdio.h>
 int main()
 {

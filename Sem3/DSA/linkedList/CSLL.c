@@ -67,19 +67,3 @@ void printList() {
     }
     printf("|\n");
 }
-
-int main() {
-    insertFirst(5);
-    insertFirst(3);
-    insertFirst(1);
-    insertLast(7);
-    insertLast(9);
-    insertFirst(5);
-    insertFirst(3);
-    insertFirst(1);
-    insertLast(7);
-    insertLast(9);
-
-    printList();
-    return 0;
-}
