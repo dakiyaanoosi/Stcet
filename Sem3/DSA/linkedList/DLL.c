@@ -101,37 +101,51 @@ void deleteLast() {
     free(temp);
 }
 
-void deleteAfter(int data) {
-    if(HEAD==NULL) {
-        printf("Error: List is Empty!\n");
+void delete(int data) {
+    if(isEmpty()) {
+        printf("List is Empty\n");
         return;
     }
-    struct Node *temp=HEAD;
-    while(temp->data!=data) {
-        temp=temp->next;
-        if(temp==NULL) {
-            printf("Error: %d NOT FOUND in the List!\n", data);
+
+    if(HEAD->next == NULL) {
+        if(HEAD->data == data) {
+            free(HEAD);
+            HEAD=NULL;
             return;
         }
-    }
-    if(temp->next==NULL) {
-        printf("Error: No value after %d!\n", data);
+        printf("%d not found in the List\n", data);
         return;
     }
 
-    struct Node *temp2=temp->next;
-    temp->next=temp2->next;
-    if(temp2->next!=NULL)
-    temp2->next->prev=temp;
+    struct Node *temp=HEAD;
+    while(temp != NULL && temp->data != data)
+        temp=temp->next;
 
-    free(temp2);
+    if(temp) {
+        if(temp->next==NULL) {
+            temp->prev->next=NULL;
+            free(temp);
+            return;
+        }
+        if(temp->prev == NULL) {
+            temp->next->prev=NULL;
+            HEAD=temp->next;
+            free(temp);
+            return;
+        }
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+        free(temp);
+        return;
+    }
+    printf("%d not found in the List\n", data);
 }
 
 void printList() {
     if(HEAD==NULL) return;
     struct Node *temp=HEAD;
     while(temp->next!=NULL) {
-        printf("%d --> ", temp->data);
+        printf("%d <--> ", temp->data);
         temp=temp->next;
     }
     printf("%d", temp->data);

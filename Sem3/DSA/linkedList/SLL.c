@@ -15,16 +15,6 @@ struct Node* createNode(int value) {
     return newNode;
 }
 
-void printList() {
-    struct Node *temp=HEAD;
-    printf("List: ");
-    while(temp!=NULL) {
-        printf("%d --> ",temp->data);
-        temp=temp->next;
-    }
-    printf("NULL\n");
-}
-
 void insertFirst(int value) {
     struct Node *newNode = createNode(value);
     newNode->next=HEAD;
@@ -110,4 +100,14 @@ void deleteAfter(int data) {
     struct Node *temp2=temp->next;
     temp->next=temp->next->next;
     free(temp2);
+}
+
+void printList() {
+    struct Node *temp=HEAD;
+    printf("List: ");
+    while(temp!=NULL) {
+        printf("%d --> ",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
 }
