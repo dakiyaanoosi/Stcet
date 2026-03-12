@@ -28,9 +28,9 @@ int main()
     }
 
     printf("\nTranspose MATRIX : \n");
-    for(int i=0;i<r;i++)
+    for(int i=0;i<c;i++)
     {
-        for(int j=0;j<c;j++)
+        for(int j=0;j<r;j++)
         printf("%-4d",mat2[i][j]);
         printf("\n");
     }
