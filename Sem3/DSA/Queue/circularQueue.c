@@ -41,7 +41,7 @@ int dequeue(struct Queue *q) {
 int getFront(struct Queue *q) {
     if(isEmpty(q)) {
         printf("Queue is Empty\n");
-        return;
+        return -1;
     }
     return q->items[q->front];
 }
@@ -49,7 +49,7 @@ int getFront(struct Queue *q) {
 void display(struct Queue *q) {
     if(isEmpty(q)) {
         printf("Queue is Empty\n");
-        return -1;
+        return;
     }
 
     printf("Queue: ");
