@@ -82,7 +82,7 @@ int main() {
 			printf("%d not found in the rray!\n", key); 
 		else
 			printf("%d found at index %d.\n", key, index);
-		printf("Time Taken: %.3f\n", time_taken);
+		printf("Time Taken: %f\n", time_taken);
 
 		printf("\n1. Search Again\n2. Enter new Array\n3. Enter anything else to exit\nEnter your choice [1/2]: ");
 		scanf("%d", &ch);

@@ -77,7 +77,7 @@ int main() {
 	printf("Sorted ");
 	printArray(a, size);	
 	
-	printf("Time taken: %.3f: \n", time_taken);
+	printf("Time taken: %f: \n", time_taken);
 	
 	return 0;
 }
