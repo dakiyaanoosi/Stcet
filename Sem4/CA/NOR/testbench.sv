@@ -1,11 +1,13 @@
-module and_gate_tb;
+module nor_gate_tb;
   reg a, b;
   wire y;
-  and_gate uut(.a(a), .b(b), .y(y));
+  
+  nor_gate uut(.a(a), .b(b), .y(y));
   
   initial begin
     $dumpfile("dump.vcd");
-    $dumpvars(0, and_gate_tb);
+    $dumpvars(0, nor_gate_tb);
+    
     a=0;
     b=0;
     #10;
@@ -21,6 +23,6 @@ module and_gate_tb;
     a=1;
     b=1;
     #10;
+    
   end
-  
 endmodule
