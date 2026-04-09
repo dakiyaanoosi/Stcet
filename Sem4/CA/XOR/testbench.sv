@@ -23,9 +23,5 @@ module xor_gate_tb;
     a=1;
     b=1;
     #10;
-    
-    a=0;
-    b=0;
-    #10;
   end
 endmodule
