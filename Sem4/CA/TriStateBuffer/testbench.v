@@ -4,7 +4,7 @@ module tri_state_tb;
 	
 	tri_state uut(.en(en), .a(a), .y(y));
 	initial begin
-		$dumpfile("dump2.vcd");
+		$dumpfile("dump.vcd");
 		$dumpvars(0, tri_state_tb);
 		
 		en=1; a=0; #10;
