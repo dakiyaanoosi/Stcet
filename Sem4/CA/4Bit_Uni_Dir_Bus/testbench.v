@@ -8,13 +8,13 @@ module bit4_uni_dir_bus_tb;
 		$dumpfile("dump3.vcd");
 		$dumpvars(0, bit4_uni_dir_bus_tb);
 		
-		en=1; a=0000; #10;
-		en=1; a=1111; #10;
-		en=1; a=1010; #10;
+		en=1; a=4'b0000; #10;
+		en=1; a=4'b1111; #10;
+		en=1; a=4'b1010; #10;
 		
-		en=0; a=0000; #10;
-		en=0; a=1111; #10;
-		en=0; a=1010; #10;
+		en=0; a=4'b0000; #10;
+		en=0; a=4'b1111; #10;
+		en=0; a=4'b1010; #10;
 	end
 endmodule
 		
