@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<sys/resource.h>
 
 void insertionSort(int a[], int size) {
 	for(int i=1; i<size; i++) {
@@ -46,9 +47,6 @@ int main() {
 			int num = rand()%100;
 			a[i]=num;
 		}
-
-		printf("Generated ");
-		printArray(a, size);
 	}
 	else {
 		printf("Enter the %d elements: ", size);
@@ -61,8 +59,10 @@ int main() {
 
 	insertionSort(a, size);
 
-	printf("Sorted ");
-	printArray(a, size);	
+	if(random != 'y' && random != 'Y') {
+		printf("Sorted ");
+		printArray(a, size);
+	}	
 	
 	int ch;
 	clock_t s, e;
@@ -77,12 +77,15 @@ int main() {
 		e=clock();
 
 		double time_taken = ((double)(e-s))/CLOCKS_PER_SEC;
+		struct rusage usage;
+		getrusage(RUSAGE_SELF, &usage);
 
 		if(index==-1)
-			printf("%d not found in the rray!\n", key); 
+			printf("%d not found in the array!\n", key); 
 		else
 			printf("%d found at index %d.\n", key, index);
 		printf("Time Taken: %f\n", time_taken);
+		printf("Memory Usage (Max Resident Set Size): %ld KB\n", usage.ru_maxrss);
 
 		printf("\n1. Search Again\n2. Enter new Array\n3. Enter anything else to exit\nEnter your choice [1/2]: ");
 		scanf("%d", &ch);

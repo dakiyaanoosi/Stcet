@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<sys/resource.h>
 
 void swap(int *a, int *b) {
 	int temp=*a;
@@ -33,7 +34,10 @@ int partition(int a[], int start, int end, char P) {
 		return index;
 	}
 
-	else printf("Invalid Arguments!\n");
+	else {
+		printf("Invalid pivot choice!\n");
+		exit(1);
+	}
 
 	return -1;
 }
@@ -93,11 +97,14 @@ int main() {
 	e=clock();
 
 	double time_taken = ((double)(e-s))/CLOCKS_PER_SEC;
+	struct rusage usage;
+	getrusage(RUSAGE_SELF, &usage);
 	
 	printf("Sorted ");
 	printArray(a, size);	
 	
 	printf("Time taken: %f\n", time_taken);
+	printf("Memory Usage (Max Resident Set Size): %ld KB\n", usage.ru_maxrss);
 	
 	return 0;
 }

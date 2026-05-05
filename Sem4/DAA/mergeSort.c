@@ -1,11 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<sys/resource.h>
 
 void merge(int a[], int start, int mid, int end) {
 	int i=start, j=mid+1, k=0;
 	int len=end-start+1;
-	int *temp = (int*)malloc(10*sizeof(int));
+	int *temp = (int*)malloc(len*sizeof(int));
 	
 	while(i<=mid && j<=end) {
 		if(a[i] <= a[j]) temp[k++] = a[i++];
@@ -73,11 +74,14 @@ int main() {
 	e=clock();
 
 	double time_taken = ((double)(e-s))/CLOCKS_PER_SEC;
+	struct rusage usage;
+	getrusage(RUSAGE_SELF, &usage);
 	
 	printf("Sorted ");
 	printArray(a, size);	
 	
-	printf("Time taken: %f: \n", time_taken);
+	printf("Time taken: %f\n", time_taken);
+	printf("Memory Usage (Max Resident Set Size): %ld KB\n", usage.ru_maxrss);
 	
 	return 0;
 }
