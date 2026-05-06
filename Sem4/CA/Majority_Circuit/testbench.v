@@ -6,7 +6,7 @@ module majority_circuit_tb;
 
     initial begin
         $dumpfile("dump.vcd");
-      	 $dumpvars(0, majority_circuit_tb);
+        $dumpvars(0, majority_circuit_tb);
 
         A = 3'b000; #10;
         A = 3'b001; #10;
