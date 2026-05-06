@@ -6,7 +6,7 @@ module twos_complementer_tb;
 
     initial begin
         $dumpfile("twoscomp.vcd");
-      	$dumpvars(0, twos_complementer_tb);
+        $dumpvars(0, twos_complementer_tb);
 
         A=4'b0000; #10;
         A=4'b0001; #10;
