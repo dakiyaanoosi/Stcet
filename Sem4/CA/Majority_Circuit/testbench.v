@@ -1,6 +1,7 @@
 module majority_circuit_tb;
     reg [2:0]A;
     wire Z;
+    integer i;
 
     majority_circuit uut(.A(A), .Z(Z));
 
@@ -8,13 +9,8 @@ module majority_circuit_tb;
         $dumpfile("dump.vcd");
         $dumpvars(0, majority_circuit_tb);
 
-        A = 3'b000; #10;
-        A = 3'b001; #10;
-        A = 3'b010; #10;
-        A = 3'b011; #10;
-        A = 3'b100; #10;
-        A = 3'b101; #10;
-        A = 3'b110; #10;
-        A = 3'b111; #10;
+        for (i=0; i<8; i=i+1) begin
+            A=i; #10;
+        end
     end
 endmodule
