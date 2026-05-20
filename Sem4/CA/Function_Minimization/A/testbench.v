@@ -1,6 +1,7 @@
 module function_min_tb;
   reg [3:0]A;
   wire F;
+  integer i;
 
   function_min uut(.A(A), .F(F));
 
@@ -8,12 +9,8 @@ module function_min_tb;
     $dumpfile("dump.vcd");
     $dumpvars(0, function_min_tb);
 
-    A = 4'b0000; #10;
-    A = 4'b0001; #10;
-    A = 4'b0011; #10;
-    A = 4'b0100; #10;
-    A = 4'b1000; #10;
-    A = 4'b1001; #10;
-    A = 4'b1111; #10;
+    for(i=0; i<16; i=i+1) begin
+      A=i; #10;
+    end
   end
 endmodule
