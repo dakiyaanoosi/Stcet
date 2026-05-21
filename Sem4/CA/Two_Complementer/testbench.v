@@ -9,8 +9,9 @@ module twos_complementer_tb;
         $dumpfile("twoscomp.vcd");
         $dumpvars(0, twos_complementer_tb);
 
-        for(i=0; i<16; i=i+1) begin
+        for(i=0; i<15; i=i+1) begin
           A=i; #10;
         end
+        A=4'b1111; #10;
     end
 endmodule

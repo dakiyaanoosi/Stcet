@@ -9,8 +9,9 @@ module majority_circuit_tb;
         $dumpfile("dump.vcd");
         $dumpvars(0, majority_circuit_tb);
 
-        for (i=0; i<8; i=i+1) begin
+        for (i=0; i<7; i=i+1) begin
             A=i; #10;
         end
+        A=3'b111; #10;
     end
 endmodule

@@ -9,8 +9,9 @@ module special_comb_tb;
       $dumpfile("dump.vcd");
       $dumpvars(0, special_comb_tb);
 
-      for(i=0; i<8; i=i+1) begin
-        A=i;
+      for(i=0; i<7; i=i+1) begin
+        A=i; #10;
       end
+      A=3'b111; #10;
   end
 endmodule

@@ -9,8 +9,9 @@ module function_min_tb;
     $dumpfile("dump.vcd");
     $dumpvars(0, function_min_tb);
 
-    for(i=0; i<16; i=i+1) begin
+    for(i=0; i<15; i=i+1) begin
       A=i; #10;
     end
+    A=4'b1111; #10;
   end
 endmodule
